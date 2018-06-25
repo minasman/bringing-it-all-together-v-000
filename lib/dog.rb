@@ -45,6 +45,11 @@ class Dog
     DB[:conn].execute(sql, self.name, self.breed, self.id)
   end
   
+  def self.find_by_id(x)
+    sql = "SELECT * FROM dogs WHERE id = ?"
+    DB[:conn].execute.(sql, x).map {|row| self.new_from_db(row)}.first 
+  end
+  
   def self.create(name:, breed:)
     dog = Dog.new(name: name, breed: breed)
     dog.save
