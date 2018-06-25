@@ -54,12 +54,14 @@ class Dog
     dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND breed = ?",name, breed)
     if !dog.empty?
       dog_data = dog[0]
-      tdog = Dog.new(dog_data[0], dog_data[1], dog_data[2])
+      puts "1"
+      dog = Dog.new(dog_data[0], dog_data[1], dog_data[2])
+      puts "2"
       binding.pry
     else
-      tdog = self.create(name: name, breed: breed)
+      dog = self.create(name: name, breed: breed)
     end
-    tdog
+    dog
   end 
   
   def self.create(name:, breed:)
